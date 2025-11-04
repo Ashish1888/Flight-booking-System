@@ -1,4 +1,4 @@
-![icon_logo](https://user-images.githubusercontent.com/56977388/178157849-38d2f2c3-1c93-4dac-9577-57f3a752e2cd.png)
+![icon_logo](https://github.com/Ashish1888/Flight-booking-System/blob/master/flight/static/img/icon_logo.png)
 
 
 
