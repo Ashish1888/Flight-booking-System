@@ -1,3 +1,25 @@
+# we are handling 5 types of APIs
+# 1 authentication APIs
+# 1.1 login(request)
+# 1.2 register(request)
+# 1.3 logout(request)
+# 2 Search APIs
+# 2.1 index(request)
+# 2.2 query(request)
+# 2.3 flight(request)
+# 3 Booking Workflow APIs
+# 3.1 review(request)
+# 3.2 book(request)
+# 3.3 payment(request)
+# 4 ticket handling APIs
+# 4.1 ticket_data(request_ref)
+# 4.2 get_ticket(request)
+# 4.3 booking request
+# 4.4 cancel request
+# 4.5 resume booking(request)
+# 5 Static pages APIs
+
+
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.http import JsonResponse
@@ -30,7 +52,6 @@ except:
     pass
 
 # Create your views here.
-
 def index(request):
     min_date = f"{datetime.now().date().year}-{datetime.now().date().month}-{datetime.now().date().day}"
     max_date = f"{datetime.now().date().year if (datetime.now().date().month+3)<=12 else datetime.now().date().year+1}-{(datetime.now().date().month + 3) if (datetime.now().date().month+3)<=12 else (datetime.now().date().month+3-12)}-{datetime.now().date().day}"
@@ -66,6 +87,7 @@ def index(request):
             'max_date': max_date
         })
 
+@csrf_exempt
 def login_view(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -84,7 +106,7 @@ def login_view(request):
             return HttpResponseRedirect(reverse('index'))
         else:
             return render(request, "flight/login.html")
-
+@csrf_exempt
 def register_view(request):
     if request.method == "POST":
         fname = request.POST['firstname']
@@ -231,6 +253,8 @@ def flight(request):
             'max_price': math.ceil(max_price/100)*100,
             'min_price': math.floor(min_price/100)*100
         })
+
+
 
 def review(request):
     flight_1 = request.GET.get('flight1Id')
